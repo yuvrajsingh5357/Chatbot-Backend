@@ -1,30 +1,26 @@
 package com.vision.chatbot.entities;
 
-import java.sql.Timestamp;
+import java.util.List;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
 @Data
-public class Ai {
+public class Chat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    
-    private String prompt;
+    private String name;
 
-    @Column(columnDefinition = "TEXT")
-    private String response;
-
-    @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp timestamp;
-
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
+    private List<ChatWindow> chatWindows;
 
 }
